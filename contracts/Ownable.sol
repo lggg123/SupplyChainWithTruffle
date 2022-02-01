@@ -1,16 +1,16 @@
 contract Ownable {
-    address payable _owner;
+    address public _owner;
 
-    constructor() public {
+    constructor() {
         _owner = msg.sender;
     }
-
+/**
+* @dev Throws if called by any account other than the owner. */
     modifier onlyOwner() {
-        require(isOwner(), "You are not the owner");
-        _;
+        require(isOwner(), "Ownable: caller is not the owner"); _;
     }
-
-    function isOwner() public view returns(bool) {
-        return (msg.sender == _owner);
+/**
+* @dev Returns true if the caller is the current owner. */
+    function isOwner() public view returns (bool) { return (msg.sender == _owner);
     }
 }
