@@ -41,6 +41,15 @@ class App extends Component {
     }
   };
 
+  listenToPaymentEvent = () => {
+    let self = this;
+    this.itemManager.events.SupplyChainStep().on("data", async function(evt) {
+      console.log(evt);
+      let itemObj= self.itemManager.methods.items(evt.returnValues._itemIndex).call();
+      console.log(itemObj);
+    })
+  }
+
   handleInputChange = (event) => {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
